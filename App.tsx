@@ -1,6 +1,6 @@
 import React from 'react';
 import { NativeStackScreenProps, createNativeStackNavigator } from '@react-navigation/native-stack';
-import { Button, View, Text } from 'react-native';
+import { Button, View, Text, ImageBackground } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 
 import { Cards } from './src/screens/cardVaccin/Cards';
@@ -29,7 +29,7 @@ export function Home({ navigation }: Props) {
   };
 
   return (
-    <View>
+    <View style={{ backgroundColor: '#000' }}>
       {/* Header and other content here */}
       <Button
         title="Cartão de Vacinação"
@@ -48,7 +48,7 @@ const Stack = createNativeStackNavigator();
 function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
+      <Stack.Navigator initialRouteName="Home" >
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="Course" component={ManageCourse} />
         <Stack.Screen name="Cards" component={Cards} />

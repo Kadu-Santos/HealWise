@@ -1,10 +1,11 @@
 export const styles = {
     container: {
       backgroundColor: '#FFFFFFFF',
-      paddingTop: 40,
       paddingHorizontal: 20,
-      width: 350,
-      height: '100%', 
+      width: '17%',
+      height: '100%',
+      borderRightWidth: 0.5,
+      borderColor: '#8F9494' 
     },
 
     logoContainer: {
