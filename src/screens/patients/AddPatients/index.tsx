@@ -25,7 +25,7 @@ export function AddPatients({ navigation }: Props): JSX.Element {
           <View style={styles.groupData}>
             <View style={styles.sectionInput}>
               <Text style={styles.sectionText}>Nome: </Text>
-              <TextInput style={{...styles.inputLabel, backgroundColor: 'white', color: "#000"}} value={username} placeholder="@Example Carlos" />
+              <TextInput style={styles.inputLabel} value={username} placeholder="@Example Carlos" />
             </View>
 
             <View style={styles.sectionInput}>
