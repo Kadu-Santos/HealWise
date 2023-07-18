@@ -1,11 +1,24 @@
 import React from 'react';
-import { styles } from "./styles";
-import { View, Text } from 'react-native';
+import { View, Text, Image } from 'react-native';
+import { styles } from './styles';
+import { SideBarNavigation } from '../../../components/SideBarNavigation';
+import ERRO from '../../../assets/Error.png';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../../../@types/RootStackParamList';
 
-export function NewReport(): JSX.Element {
+type Props = NativeStackScreenProps<RootStackParamList>;
+
+export function NewReport({ navigation }: Props): JSX.Element {
   return (
-    <View>
-      <Text>Gerar Relatório</Text>
+    <View style={styles.body}>
+      <SideBarNavigation navigation={navigation}/>
+
+      <View style={styles.section}>
+        <View style={styles.sectionTitle}>
+          <Text style={styles.title}>Novo Relatório</Text>
+        </View>
+        <Image source={ERRO} style={styles.logoError} />
+      </View>
     </View>
   );
 }

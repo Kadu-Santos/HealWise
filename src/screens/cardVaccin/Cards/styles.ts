@@ -3,6 +3,7 @@ export const styles = {
         color: '#FFFFFFFF',
         fontSize: 25,
         fontWeight: 'bold',
+        paddingTop: 5,
     },
 
     section: {

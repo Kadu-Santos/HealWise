@@ -31,7 +31,7 @@ export const styles = {
         borderColor: 'black',
     },
     
-    section:{
+  section:{
         color: '#008FFF',
         paddingBottom: 2,
         fontSize: 17,
@@ -39,4 +39,15 @@ export const styles = {
         marginLeft: 5,
     },
 
+  itemText: {
+      fontSize: 14,
+      color: '#000000',
+      marginLeft: 20,
+      padding: 7,
+  },
+
+  touch: {
+    padding: 2, 
+    borderRadius: 5,
+  }
 }
