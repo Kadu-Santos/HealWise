@@ -77,7 +77,7 @@ export const styles = {
       marginBotton: 0,
       padding: 10,
       width: 500,
-      height: 480,
-    }
+      height: 500,
+    },
 
 };
