@@ -22,7 +22,7 @@ export const styles = {
     },
 
     body: {
-        backgroundColor: "#99CFFF",
+        backgroundColor: "#FFFFFF",
         flexDirection: 'row', 
         height: '100%'
     },
@@ -54,6 +54,7 @@ export const styles = {
       borderColor: 'black',
       paddingTop: 5,
       paddingLeft: 10,
+      color: 'black',
     },
 
     sectionInput:{

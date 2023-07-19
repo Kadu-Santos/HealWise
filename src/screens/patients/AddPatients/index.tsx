@@ -22,38 +22,88 @@ export function AddPatients({ navigation }: Props): JSX.Element {
 
 
         <View style={{ flexDirection: 'row'}}>
+          
           <View style={styles.groupData}>
             <View style={styles.sectionInput}>
               <Text style={styles.sectionText}>Nome: </Text>
-              <TextInput style={styles.inputLabel} value={username} placeholder="@Example Carlos" />
+              <TextInput style={{...styles.inputLabel, }} 
+                          placeholderTextColor={'gray'}
+                          selectionColor={'#00C2FF'} 
+                          selectTextOnFocus = {true}
+                          placeholder="@Example Carlos"
+                          value={username}/>
             </View>
 
             <View style={styles.sectionInput}>
               <Text style={styles.sectionText}>CPF: </Text>
-              <TextInput style={styles.inputLabel} value={username} placeholder="000.000.000-00" />
+              <TextInput style={{...styles.inputLabel, }} 
+                          placeholderTextColor={'gray'}
+                          selectionColor={'#00C2FF'} 
+                          selectTextOnFocus = {true} 
+                          placeholder="000.000.000-00" 
+                          value={username}/>
             </View>
 
             <View style={styles.sectionInput}>
               <Text style={styles.sectionText}>Data Nascimento: </Text>
-              <TextInput style={{ ...styles.inputLabel, width: 85 }} value={username} placeholder="Dia" />
-              <TextInput style={{ ...styles.inputLabel, width: 85 }} value={username} placeholder="Mês" />
-              <TextInput style={{ ...styles.inputLabel, width: 85 }} value={username} placeholder="Ano" />
+              <TextInput style={{ ...styles.inputLabel, width: 85 }} 
+                          placeholderTextColor={'gray'}
+                          selectionColor={'#00C2FF'} 
+                          selectTextOnFocus = {true} 
+                          placeholder="Dia" 
+                          value={username}/>
+
+              <TextInput style={{ ...styles.inputLabel, width: 85 }} 
+                          placeholderTextColor={'gray'}
+                          selectionColor={'#00C2FF'} 
+                          selectTextOnFocus = {true} 
+                          placeholder="Mês" 
+                          value={username}/>
+
+              <TextInput style={{ ...styles.inputLabel, width: 85 }} 
+                          placeholderTextColor={'gray'}
+                          selectionColor={'#00C2FF'} 
+                          selectTextOnFocus = {true} 
+                          placeholder="Ano" 
+                          value={username}/>
             </View>
 
             <View style={styles.sectionInput}>
               <Text style={styles.sectionText}>Nº Matricola: </Text>
-              <TextInput style={styles.inputLabel} value={username} placeholder="000.00-0" />
+              <TextInput style={{...styles.inputLabel, }} 
+                          placeholderTextColor={'gray'}
+                          selectionColor={'#00C2FF'} 
+                          selectTextOnFocus = {true}
+                          placeholder="000.00-0"
+                          value={username}/>
             </View>
 
             <View style={styles.sectionInput}>
               <Text style={styles.sectionText}>Telefone: </Text>
-              <TextInput style={styles.inputLabel} value={username} placeholder="(11) 1111 - 1111" />
+              <TextInput style={{...styles.inputLabel, }} 
+                          placeholderTextColor={'gray'}
+                          selectionColor={'#00C2FF'} 
+                          selectTextOnFocus = {true}
+                          placeholder="(11) 1111 - 1111"
+                          dataDetectorTypes='phoneNumber'
+                          value={username}/>
             </View>
 
             <View style={styles.sectionInput}>
               <Text style={styles.sectionText}>Curso: </Text>
-              <TextInput style={{ ...styles.inputLabel, width: 190 }} value={username} placeholder="@Example Sistemas" />
-              <TextInput style={{ ...styles.inputLabel, width: 90 }} value={username} placeholder="Turma" />
+              <TextInput style={{ ...styles.inputLabel, width: 190 }} 
+                          placeholderTextColor={'gray'}
+                          selectionColor={'#00C2FF'} 
+                          selectTextOnFocus = {true} 
+                          placeholder="@Example Sistemas"
+                          value={username}/>
+
+              <TextInput style={{ ...styles.inputLabel, width: 90 }} 
+                          placeholderTextColor={'gray'}
+                          selectionColor={'#00C2FF'} 
+                          selectTextOnFocus = {true} 
+                          placeholder="Turma"
+                          value={username}/>
             </View>
 
             <View style={{ flexDirection: 'row', marginLeft: 100, marginTop: 10 }}>
@@ -63,44 +113,110 @@ export function AddPatients({ navigation }: Props): JSX.Element {
             </View>
             <View style={styles.sectionInput}>
               <Text style={styles.sectionText}>Caracteristicas: </Text>
-              <TextInput style={{ ...styles.inputLabel, width: 85 }} value={username} placeholder="kg" />
-              <TextInput style={{ ...styles.inputLabel, width: 85 }} value={username} placeholder="anos" />
-              <TextInput style={{ ...styles.inputLabel, width: 85 }} value={username} placeholder="xx+" />
+              <TextInput style={{ ...styles.inputLabel, width: 85 }} 
+                          placeholderTextColor={'gray'}
+                          selectionColor={'#00C2FF'} 
+                          selectTextOnFocus = {true} 
+                          placeholder="Kg"
+                          value={username}/>
+
+              <TextInput style={{ ...styles.inputLabel, width: 85 }} 
+                          placeholderTextColor={'gray'}
+                          selectionColor={'#00C2FF'} 
+                          selectTextOnFocus = {true} 
+                          placeholder="00"
+                          value={username}/>
+
+              <TextInput style={{ ...styles.inputLabel, width: 85 }} 
+                          placeholderTextColor={'gray'}
+                          selectionColor={'#00C2FF'} 
+                          selectTextOnFocus = {true} 
+                          placeholder="xx+"
+                          value={username}/>
             </View>
           </View>
 
           <View style={styles.groupData}>
             <View style={styles.sectionInput}>
               <Text style={styles.sectionText}>Nome: </Text>
-              <TextInput style={styles.inputLabel} value={username} placeholder="@Example Carlos" />
+              <TextInput style={{...styles.inputLabel, }} 
+                          placeholderTextColor={'gray'}
+                          selectionColor={'#00C2FF'} 
+                          selectTextOnFocus = {true}
+                          placeholder="@Example Carlos"
+                          value={username}/>
             </View>
 
             <View style={styles.sectionInput}>
               <Text style={styles.sectionText}>CPF: </Text>
-              <TextInput style={styles.inputLabel} value={username} placeholder="000.000.000-00" />
+              <TextInput style={{...styles.inputLabel, }} 
+                          placeholderTextColor={'gray'}
+                          selectionColor={'#00C2FF'} 
+                          selectTextOnFocus = {true} 
+                          placeholder="000.000.000-00" 
+                          value={username}/>
             </View>
 
             <View style={styles.sectionInput}>
               <Text style={styles.sectionText}>Data Nascimento: </Text>
-              <TextInput style={{ ...styles.inputLabel, width: 85 }} value={username} placeholder="Dia" />
-              <TextInput style={{ ...styles.inputLabel, width: 85 }} value={username} placeholder="Mês" />
-              <TextInput style={{ ...styles.inputLabel, width: 85 }} value={username} placeholder="Ano" />
+              <TextInput style={{ ...styles.inputLabel, width: 85 }} 
+                          placeholderTextColor={'gray'}
+                          selectionColor={'#00C2FF'} 
+                          selectTextOnFocus = {true} 
+                          placeholder="Dia" 
+                          value={username}/>
+
+              <TextInput style={{ ...styles.inputLabel, width: 85 }} 
+                          placeholderTextColor={'gray'}
+                          selectionColor={'#00C2FF'} 
+                          selectTextOnFocus = {true} 
+                          placeholder="Mês" 
+                          value={username}/>
+
+              <TextInput style={{ ...styles.inputLabel, width: 85 }} 
+                          placeholderTextColor={'gray'}
+                          selectionColor={'#00C2FF'} 
+                          selectTextOnFocus = {true} 
+                          placeholder="Ano" 
+                          value={username}/>
             </View>
 
             <View style={styles.sectionInput}>
               <Text style={styles.sectionText}>Nº Matricola: </Text>
-              <TextInput style={styles.inputLabel} value={username} placeholder="000.00-0" />
+              <TextInput style={{...styles.inputLabel, }} 
+                          placeholderTextColor={'gray'}
+                          selectionColor={'#00C2FF'} 
+                          selectTextOnFocus = {true}
+                          placeholder="000.00-0"
+                          value={username}/>
             </View>
 
             <View style={styles.sectionInput}>
               <Text style={styles.sectionText}>Telefone: </Text>
-              <TextInput style={styles.inputLabel} value={username} placeholder="(11) 1111 - 1111" />
+              <TextInput style={{...styles.inputLabel, }} 
+                          placeholderTextColor={'gray'}
+                          selectionColor={'#00C2FF'} 
+                          selectTextOnFocus = {true}
+                          placeholder="(11) 1111 - 1111"
+                          dataDetectorTypes='phoneNumber'
+                          value={username}/>
             </View>
 
             <View style={styles.sectionInput}>
               <Text style={styles.sectionText}>Curso: </Text>
-              <TextInput style={{ ...styles.inputLabel, width: 190 }} value={username} placeholder="@Example Sistemas" />
-              <TextInput style={{ ...styles.inputLabel, width: 90 }} value={username} placeholder="Turma" />
+              <TextInput style={{ ...styles.inputLabel, width: 190 }} 
+                          placeholderTextColor={'gray'}
+                          selectionColor={'#00C2FF'} 
+                          selectTextOnFocus = {true} 
+                          placeholder="@Example Sistemas"
+                          value={username}/>
+
+              <TextInput style={{ ...styles.inputLabel, width: 90 }} 
+                          placeholderTextColor={'gray'}
+                          selectionColor={'#00C2FF'} 
+                          selectTextOnFocus = {true} 
+                          placeholder="Turma"
+                          value={username}/>
             </View>
 
             <View style={{ flexDirection: 'row', marginLeft: 100, marginTop: 10 }}>
@@ -110,9 +226,26 @@ export function AddPatients({ navigation }: Props): JSX.Element {
             </View>
             <View style={styles.sectionInput}>
               <Text style={styles.sectionText}>Caracteristicas: </Text>
-              <TextInput style={{ ...styles.inputLabel, width: 85 }} value={username} placeholder="kg" />
-              <TextInput style={{ ...styles.inputLabel, width: 85 }} value={username} placeholder="anos" />
-              <TextInput style={{ ...styles.inputLabel, width: 85 }} value={username} placeholder="xx+" />
+              <TextInput style={{ ...styles.inputLabel, width: 85 }} 
+                          placeholderTextColor={'gray'}
+                          selectionColor={'#00C2FF'} 
+                          selectTextOnFocus = {true} 
+                          placeholder="Kg"
+                          value={username}/>
+
+              <TextInput style={{ ...styles.inputLabel, width: 85 }} 
+                          placeholderTextColor={'gray'}
+                          selectionColor={'#00C2FF'} 
+                          selectTextOnFocus = {true} 
+                          placeholder="00"
+                          value={username}/>
+
+              <TextInput style={{ ...styles.inputLabel, width: 85 }} 
+                          placeholderTextColor={'gray'}
+                          selectionColor={'#00C2FF'} 
+                          selectTextOnFocus = {true} 
+                          placeholder="xx+"
+                          value={username}/>
             </View>
           </View>
         </View>

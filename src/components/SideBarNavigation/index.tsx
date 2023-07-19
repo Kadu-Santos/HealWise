@@ -13,7 +13,7 @@ export function SideBarNavigation({ navigation }: Props): JSX.Element {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.container} >
 
       <View style={styles.logoContainer}>
         <Image source={HOME_LOGO} style={styles.logo} />

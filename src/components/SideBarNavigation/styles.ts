@@ -1,6 +1,6 @@
 export const styles = {
     container: {
-      backgroundColor: '#FFFFFFFF',
+      backgroundColor: '#E1E4EB',
       paddingHorizontal: 20,
       width: '17%',
       height: '100%',
