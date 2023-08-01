@@ -65,9 +65,18 @@ export const styles = {
 
     sectionText:{
       width: 100,
-      textAlign: 'right',
       fontWeight: '600',
       color: 'black',
+      marginLeft: 5, 
+      textAlign: 'right'
+    },
+
+    sectionTextRadio:{
+      width: 100,
+      fontWeight: '600',
+      color: 'black',
+      marginLeft: 5, 
+      textAlign: 'left'
     },
 
     groupData: {
@@ -80,4 +89,17 @@ export const styles = {
       height: 500,
     },
 
+    butt: {
+      alignItems: 'center',
+      backgroundColor: '#007BFF',
+      paddingVertical: 10,
+      borderRadius: 5,
+      marginHorizontal: 10,
+      width: 150,
+    },
+    buttText: {
+      color: 'white',
+      fontSize: 16,
+      fontWeight: 'bold',
+    },
 };
