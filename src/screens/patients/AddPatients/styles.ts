@@ -82,7 +82,7 @@ export const styles = {
     groupData: {
       borderColor: 'black',
       borderRadius: 5,
-      margin: 20,
+      margin: 5,
       marginBotton: 0,
       padding: 10,
       width: 500,
