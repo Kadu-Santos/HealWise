@@ -39,7 +39,10 @@ export function AddPatients({ navigation }: Props): JSX.Element {
       planhealth: ''
     }
   });
-  const onSubmit = data => console.log(data);
+
+  const onSubmit = data => {
+    // Armazene os dados capturados no estado
+  };
 
   return (
     <View style={styles.body}>
