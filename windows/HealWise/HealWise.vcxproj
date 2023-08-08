@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- This project was created with react-native-windows 0.72.1 -->
+<!-- This project was created with react-native-windows 0.72.5 -->
 <Project ToolsVersion="Current" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(SolutionDir)\ExperimentalFeatures.props" Condition="Exists('$(SolutionDir)\ExperimentalFeatures.props')" />
   <PropertyGroup Label="Globals">
     <CppWinRTOptimized>true</CppWinRTOptimized>
     <CppWinRTRootNamespaceAutoMerge>true</CppWinRTRootNamespaceAutoMerge>
     <MinimalCoreWin>true</MinimalCoreWin>
-    <ProjectGuid>{eb57a52b-9404-4e3b-9afa-b7fc43b270cb}</ProjectGuid>
+    <ProjectGuid>{7051fefe-90c3-42ca-b94c-3eea500b3a13}</ProjectGuid>
     <ProjectName>HealWise</ProjectName>
     <RootNamespace>HealWise</RootNamespace>
     <DefaultLanguage>en-US</DefaultLanguage>

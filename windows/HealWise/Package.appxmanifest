@@ -7,11 +7,11 @@
   IgnorableNamespaces="uap mp">
 
   <Identity
-    Name="85628151-9e8d-46d9-8b02-266134d8fc7d"
+    Name="67bef242-cf8f-4cab-b301-efa7ab9e74b9"
     Publisher="CN=khadu"
     Version="1.0.0.0" />
 
-  <mp:PhoneIdentity PhoneProductId="85628151-9e8d-46d9-8b02-266134d8fc7d" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <mp:PhoneIdentity PhoneProductId="67bef242-cf8f-4cab-b301-efa7ab9e74b9" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
     <DisplayName>HealWise</DisplayName>

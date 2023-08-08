@@ -102,4 +102,10 @@ export const styles = {
       fontSize: 16,
       fontWeight: 'bold',
     },
+
+    require: {
+      color: "red",
+      fontSize: 25,
+      fontWeight: 'bold',
+    },
 };

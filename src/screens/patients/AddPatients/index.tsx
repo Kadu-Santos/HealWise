@@ -1,11 +1,11 @@
-import { Text, View, TextInput, Button, TouchableOpacity } from "react-native";
+import { Text, View, TextInput, TouchableOpacity } from "react-native";
 import { useForm, Controller } from "react-hook-form";
-import { RadioButton } from 'react-native-paper';
+import React from 'react';
 import { styles } from './styles';
+import { RadioButton } from 'react-native-paper';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../../@types/RootStackParamList';
 import { SideBarNavigation } from '../../../components/SideBarNavigation';
-import React from 'react';
 
 type Props = NativeStackScreenProps<RootStackParamList>;
 
@@ -13,7 +13,7 @@ export function AddPatients({ navigation }: Props): JSX.Element {
 
   const { control, handleSubmit, formState: { errors } } = useForm({
     defaultValues: {
-      firstName: '',
+      name: '',
       cpf: '',
       birthDay: '',
       birthMonth: '',
@@ -28,8 +28,8 @@ export function AddPatients({ navigation }: Props): JSX.Element {
       susCardNumber: '',
       responsavelName: '',
       responsavelTelefone: '',
-      gender: '',
-      moradia: '',
+      gender: 'M',
+      moradia: '1',
       regime: '',
       road: '',
       number: '',
@@ -40,8 +40,8 @@ export function AddPatients({ navigation }: Props): JSX.Element {
     }
   });
 
-  const onSubmit = data => {
-    // Armazene os dados capturados no estado
+  const onSubmit = data  => {
+    
   };
 
   return (
@@ -70,8 +70,8 @@ export function AddPatients({ navigation }: Props): JSX.Element {
                   onChangeText={onChange}
                   value={value}
                 />
-              )} name="firstName" />
-              {errors.firstName && <Text>This is required.</Text>}
+              )} name="name" />
+              {errors.name && <Text style = {styles.require}>*</Text>}
             </View>
 
             {/* CPF */}
@@ -89,7 +89,7 @@ export function AddPatients({ navigation }: Props): JSX.Element {
                   value={value}
                 />
               )} name="cpf" />
-              {errors.cpf && <Text>This is required.</Text>}
+              {errors.cpf && <Text style = {styles.require}>*</Text>}
             </View>
 
             {/* Data de Nascimento */}
@@ -135,9 +135,9 @@ export function AddPatients({ navigation }: Props): JSX.Element {
                   />
                 )} name="birthYear" />
               </View>
-              {errors.birthDay && <Text>This field is required.</Text>}
-              {errors.birthMonth && <Text>This field is required.</Text>}
-              {errors.birthYear && <Text>This field is required.</Text>}
+              {errors.birthDay && <Text style = {styles.require}>*</Text>}
+              {errors.birthMonth && <Text style = {styles.require}>*</Text>}
+              {errors.birthYear && <Text style = {styles.require}>*</Text>}
             </View>
 
             <View style={styles.sectionInput}>
@@ -154,7 +154,7 @@ export function AddPatients({ navigation }: Props): JSX.Element {
                   value={value}
                 />
               )} name="studentNumber" />
-              {errors.studentNumber && <Text>This field is required.</Text>}
+              {errors.studentNumber && <Text style = {styles.require}>*</Text>}
             </View>
 
             <View style={styles.sectionInput}>
@@ -172,7 +172,7 @@ export function AddPatients({ navigation }: Props): JSX.Element {
                   value={value}
                 />
               )} name="phone" />
-              {errors.phone && <Text>This field is required.</Text>}
+              {errors.phone && <Text style = {styles.require}>*</Text>}
             </View>
 
             <View style={styles.sectionInput}>
@@ -202,8 +202,8 @@ export function AddPatients({ navigation }: Props): JSX.Element {
                   value={value}
                 />
               )} name="class" />
-              {errors.course && <Text>This field is required.</Text>}
-              {errors.class && <Text>This field is required.</Text>}
+              {errors.course && <Text style = {styles.require}>*</Text>}
+              {errors.class && <Text style = {styles.require}>*</Text>}
             </View>
 
             <View style={{ flexDirection: 'row', marginLeft: 100, marginTop: 10 }}>
@@ -253,9 +253,9 @@ export function AddPatients({ navigation }: Props): JSX.Element {
                 />
               )} name="bloodType" />
 
-              {errors.weight && <Text>This field is required.</Text>}
-              {errors.value && <Text>This field is required.</Text>}
-              {errors.bloodType && <Text>This field is required.</Text>}
+              {errors.weight && <Text style = {styles.require}>*</Text>}
+              {errors.value && <Text style = {styles.require}>*</Text>}
+              {errors.bloodType && <Text style = {styles.require}>*</Text>}
             </View>
 
             <View style={{ ...styles.sectionInput, flexDirection: 'row', alignItems: 'center' }}>
@@ -298,7 +298,7 @@ export function AddPatients({ navigation }: Props): JSX.Element {
                   value={value}
                 />
               )} name="susCardNumber" />
-              {errors.susCardNumber && <Text>This field is required.</Text>}
+              {errors.susCardNumber && <Text style = {styles.require}>*</Text>}
             </View>
 
             {/* Nome do responsável */}
@@ -438,7 +438,7 @@ export function AddPatients({ navigation }: Props): JSX.Element {
                 value={value}
               />
             )} name="road" />
-            {errors.road && <Text>This field is required.</Text>}
+            {errors.road && <Text style = {styles.require}>*</Text>}
 
             {/* Número */}
             <Text style={{ ...styles.sectionText, marginLeft: -60 }}>Nº: </Text>
@@ -455,10 +455,10 @@ export function AddPatients({ navigation }: Props): JSX.Element {
                 keyboardType="numeric" // Defina o teclado como numérico para digitar apenas números
               />
             )} name="number" />
-            {errors.number && <Text>This field is required.</Text>}
+            {errors.number && <Text style = {styles.require}>*</Text>}
 
             {/* Bairro */}
-            <Text style={styles.sectionText}>Bairro: </Text>
+            <Text style={{...styles.sectionText, marginLeft: 25}}>Bairro: </Text>
             <Controller control={control} rules={{ required: true }} render={({ field: { onChange, onBlur, value } }) => (
               <TextInput
                 style={{ ...styles.inputLabel }}
@@ -471,7 +471,7 @@ export function AddPatients({ navigation }: Props): JSX.Element {
                 value={value}
               />
             )} name="neighborhood" />
-            {errors.neighborhood && <Text>This field is required.</Text>}
+            {errors.neighborhood && <Text style = {styles.require}>*</Text>}
           </View>
 
           <View style={styles.sectionInput}>
@@ -489,7 +489,7 @@ export function AddPatients({ navigation }: Props): JSX.Element {
                 value={value}
               />
             )} name="city" />
-            {errors.city && <Text>This field is required.</Text>}
+            {errors.city && <Text style = {styles.require}>*</Text>}
 
             {/* UF */}
             <Text style={{ ...styles.sectionText, marginLeft: -60 }}>UF: </Text>
@@ -505,7 +505,7 @@ export function AddPatients({ navigation }: Props): JSX.Element {
                 value={value}
               />
             )} name="state" />
-            {errors.state && <Text>This field is required.</Text>}
+            {errors.state && <Text style = {styles.require}>*</Text>}
 
             {/* Nome do plano Saúde */}
             <View style={styles.sectionInput}>
