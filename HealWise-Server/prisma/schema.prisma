@@ -1,0 +1,45 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+
+model Address {
+  id           Int      @id @default(autoincrement())
+  clientId     Int
+  street       String
+  number       String
+  district     String
+  city         String
+  state        String
+  dwellingType String?
+  patient      Patient  @relation(fields: [clientId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model Patient {
+  id                 Int        @id @default(autoincrement())
+  cpf                String     @unique(map: "sqlite_autoindex_patient_1")
+  name               String
+  birthDate          String
+  enrollmentNumber   String
+  phone              String?
+  courses            String?
+  classe             String?
+  healthPlan         String?
+  guardianName       String?
+  guardianPhone      String?
+  weight             Decimal?
+  height             Decimal?
+  bloodType          String?
+  gender             String?
+  susCardNumber      String
+  regime             String?
+  addresses          Address[]
+}

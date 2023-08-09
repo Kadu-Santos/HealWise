@@ -108,4 +108,4 @@ export const styles = {
       fontSize: 25,
       fontWeight: 'bold',
     },
-};
+} as const;

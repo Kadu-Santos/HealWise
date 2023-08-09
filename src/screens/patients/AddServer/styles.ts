@@ -32,4 +32,4 @@ export const styles = {
         marginTop: '10%',
     }
 
-};
+} as const;

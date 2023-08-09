@@ -1,0 +1,27 @@
+export type dataForm = {
+    name: String,
+    cpf: String,
+    birthDay: String,
+    birthMonth: String,
+    birthYear: String,
+    studentNumber: String,
+    phone: String,
+    course: String,
+    class: String,
+    weight: Number,
+    value: Number,
+    bloodType: String,
+    susCardNumber: String,
+    responsavelName: String,
+    responsavelTelefone: String,
+    gender: String,
+    moradia: Number,
+    regime: String,
+    road: String,
+    number: Number,
+    neighborhood: String,
+    city: String,
+    state: String,
+    planhealth: String
+};
+  

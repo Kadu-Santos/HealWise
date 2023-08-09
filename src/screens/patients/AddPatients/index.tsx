@@ -1,17 +1,22 @@
 import { Text, View, TextInput, TouchableOpacity } from "react-native";
 import { useForm, Controller } from "react-hook-form";
-import React from 'react';
+import React, { useState } from 'react';
 import { styles } from './styles';
 import { RadioButton } from 'react-native-paper';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../../@types/RootStackParamList';
 import { SideBarNavigation } from '../../../components/SideBarNavigation';
+import { createPatient } from "./scripts"
+import { dataForm } from "../../../@types/dataForm";
 
 type Props = NativeStackScreenProps<RootStackParamList>;
 
 export function AddPatients({ navigation }: Props): JSX.Element {
 
-  const { control, handleSubmit, formState: { errors } } = useForm({
+  const [message, setMessage] = useState('');
+  const [isMessageVisible, setIsMessageVisible] = useState(false);
+
+  const { control, handleSubmit, reset, formState: { errors } } = useForm({
     defaultValues: {
       name: '',
       cpf: '',
@@ -40,8 +45,23 @@ export function AddPatients({ navigation }: Props): JSX.Element {
     }
   });
 
-  const onSubmit = data  => {
-    
+  const onSubmit = (data: dataForm) => {
+    createPatient(data)
+      .then(response => {
+        setMessage('Dados gravados com sucesso.');
+        setIsMessageVisible(true);
+        reset();
+        setTimeout(() => {
+          setIsMessageVisible(false);
+        }, 3000);
+      })
+      .catch(error => {
+        setMessage('Erro! Confira os dados e tente novamente.');
+        setIsMessageVisible(true);
+        setTimeout(() => {
+          setIsMessageVisible(false);
+        }, 3000);
+      });
   };
 
   return (
@@ -55,6 +75,20 @@ export function AddPatients({ navigation }: Props): JSX.Element {
         </View>
 
         <View style={{ flexDirection: 'row' }}>
+          {/* Menssagem de Sucesso ou Erro ao salvalr os dados */}
+          {isMessageVisible && (
+            <View style={{ 
+              position: 'absolute',
+              zIndex: 1, 
+              top: '50%', 
+              width: '80%', 
+              backgroundColor: message.includes('Erro') ? 'red' : 'green', 
+              padding: 10,
+              borderRadius: 10 }}>
+              <Text style={{ color: 'white', fontSize: 60, textAlign:'center' }}>{message}</Text>
+            </View>
+          )}
+
           <View style={styles.groupData}>
             {/* Nome */}
             <View style={styles.sectionInput}>
@@ -71,25 +105,38 @@ export function AddPatients({ navigation }: Props): JSX.Element {
                   value={value}
                 />
               )} name="name" />
-              {errors.name && <Text style = {styles.require}>*</Text>}
+              {errors.name && <Text style={styles.require}>*</Text>}
             </View>
 
             {/* CPF */}
             <View style={styles.sectionInput}>
               <Text style={styles.sectionText}>CPF: </Text>
-              <Controller control={control} rules={{ required: true }} render={({ field: { onChange, onBlur, value } }) => (
-                <TextInput
-                  style={styles.inputLabel}
-                  placeholderTextColor={'gray'}
-                  selectionColor={'#00C2FF'}
-                  selectTextOnFocus={true}
-                  placeholder="000.000.000-00"
-                  onBlur={onBlur}
-                  onChangeText={onChange}
-                  value={value}
-                />
-              )} name="cpf" />
-              {errors.cpf && <Text style = {styles.require}>*</Text>}
+              <Controller
+                control={control}
+                rules={{
+                  pattern: {
+                    value: /^\d{3}\d{3}\d{3}\d{2}$/,
+                    message: "CPF inválido"
+                  }
+                }}
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <TextInput
+                    style={styles.inputLabel}
+                    placeholderTextColor={'gray'}
+                    selectionColor={'#00C2FF'}
+                    selectTextOnFocus={true}
+                    placeholder="000.000.000-00"
+                    onBlur={onBlur}
+                    onChangeText={onChange}
+                    value={value}
+                    maxLength={11}
+                    keyboardType="numeric" // Definir o teclado como numérico
+                  />
+                )}
+                name="cpf"
+              />
+              {errors.cpf && <Text style={styles.require}>*</Text>}
+
             </View>
 
             {/* Data de Nascimento */}
@@ -135,11 +182,12 @@ export function AddPatients({ navigation }: Props): JSX.Element {
                   />
                 )} name="birthYear" />
               </View>
-              {errors.birthDay && <Text style = {styles.require}>*</Text>}
-              {errors.birthMonth && <Text style = {styles.require}>*</Text>}
-              {errors.birthYear && <Text style = {styles.require}>*</Text>}
+              {errors.birthDay && <Text style={styles.require}>*</Text>}
+              {errors.birthMonth && <Text style={styles.require}>*</Text>}
+              {errors.birthYear && <Text style={styles.require}>*</Text>}
             </View>
 
+            {/* Número  de matrícola */}
             <View style={styles.sectionInput}>
               <Text style={styles.sectionText}>Nº Matrícula: </Text>
               <Controller control={control} rules={{ required: true }} render={({ field: { onChange, onBlur, value } }) => (
@@ -154,25 +202,35 @@ export function AddPatients({ navigation }: Props): JSX.Element {
                   value={value}
                 />
               )} name="studentNumber" />
-              {errors.studentNumber && <Text style = {styles.require}>*</Text>}
+              {errors.studentNumber && <Text style={styles.require}>*</Text>}
             </View>
 
+            {/* Telefone */}
             <View style={styles.sectionInput}>
               <Text style={styles.sectionText}>Telefone: </Text>
-              <Controller control={control} rules={{ required: true }} render={({ field: { onChange, onBlur, value } }) => (
-                <TextInput
-                  style={{ ...styles.inputLabel }}
-                  placeholderTextColor={'gray'}
-                  selectionColor={'#00C2FF'}
-                  selectTextOnFocus={true}
-                  placeholder="(11) 1111 - 1111"
-                  dataDetectorTypes='phoneNumber'
-                  onBlur={onBlur}
-                  onChangeText={onChange}
-                  value={value}
-                />
-              )} name="phone" />
-              {errors.phone && <Text style = {styles.require}>*</Text>}
+              <Controller control={control}
+                rules={{
+                  required: true,
+                  pattern: {
+                    value: /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/,
+                    message: "Telefone inválido"
+                  }
+                }}
+                render={({ field: { onChange, onBlur, value } }) => (
+
+                  <TextInput
+                    style={{ ...styles.inputLabel }}
+                    placeholderTextColor={'gray'}
+                    selectionColor={'#00C2FF'}
+                    selectTextOnFocus={true}
+                    placeholder="(11) 1111 - 1111"
+                    onBlur={onBlur}
+                    onChangeText={onChange}
+                    maxLength={11}
+                    value={value}
+                  />
+                )} name="phone" />
+              {errors.phone && <Text style={styles.require}>*</Text>}
             </View>
 
             <View style={styles.sectionInput}>
@@ -202,8 +260,8 @@ export function AddPatients({ navigation }: Props): JSX.Element {
                   value={value}
                 />
               )} name="class" />
-              {errors.course && <Text style = {styles.require}>*</Text>}
-              {errors.class && <Text style = {styles.require}>*</Text>}
+              {errors.course && <Text style={styles.require}>*</Text>}
+              {errors.class && <Text style={styles.require}>*</Text>}
             </View>
 
             <View style={{ flexDirection: 'row', marginLeft: 100, marginTop: 10 }}>
@@ -213,49 +271,80 @@ export function AddPatients({ navigation }: Props): JSX.Element {
             </View>
 
             <View style={styles.sectionInput}>
+              {/* Peso */}
               <Text style={styles.sectionText}>Características: </Text>
-              <Controller control={control} rules={{ required: true }} render={({ field: { onChange, onBlur, value } }) => (
-                <TextInput
-                  style={{ ...styles.inputLabel, width: 85 }}
-                  placeholderTextColor={'gray'}
-                  selectionColor={'#00C2FF'}
-                  selectTextOnFocus={true}
-                  placeholder="Kg"
-                  onBlur={onBlur}
-                  onChangeText={onChange}
-                  value={value}
-                />
-              )} name="weight" />
+              <Controller control={control}
+                rules={{
+                  required: true,
+                  pattern: {
+                    value: /^(\d+(\.\d{1,2})?)?$/,
+                    message: "Peso inválido"
+                  }
+                }}
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <TextInput
+                    style={{ ...styles.inputLabel, width: 85 }}
+                    placeholderTextColor={'gray'}
+                    selectionColor={'#00C2FF'}
+                    selectTextOnFocus={true}
+                    placeholder="Kg"
+                    onBlur={onBlur}
+                    onChangeText={onChange}
+                    value={value}
+                  />
+                )} name="weight" />
 
-              <Controller control={control} rules={{ required: true }} render={({ field: { onChange, onBlur, value } }) => (
-                <TextInput
-                  style={{ ...styles.inputLabel, width: 85 }}
-                  placeholderTextColor={'gray'}
-                  selectionColor={'#00C2FF'}
-                  selectTextOnFocus={true}
-                  placeholder="0,00"
-                  onBlur={onBlur}
-                  onChangeText={onChange}
-                  value={value}
-                />
-              )} name="value" />
+              {/* Altura */}
+              <Controller control={control}
+                rules={{
+                  required: true,
+                  pattern: {
+                    value: /^(?:[1-9]\d*|0)(?:\.\d{1,2})?$/,
+                    message: "Altura inválida"
+                  }
+                }}
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <TextInput
+                    style={{ ...styles.inputLabel, width: 85 }}
+                    placeholderTextColor={'gray'}
+                    selectionColor={'#00C2FF'}
+                    selectTextOnFocus={true}
+                    placeholder="0,00"
+                    onBlur={onBlur}
+                    onChangeText={onChange}
+                    value={value}
+                  />
+                )} name="value" />
 
-              <Controller control={control} rules={{ required: true }} render={({ field: { onChange, onBlur, value } }) => (
-                <TextInput
-                  style={{ ...styles.inputLabel, width: 85 }}
-                  placeholderTextColor={'gray'}
-                  selectionColor={'#00C2FF'}
-                  selectTextOnFocus={true}
-                  placeholder="xx+"
-                  onBlur={onBlur}
-                  onChangeText={onChange}
-                  value={value}
-                />
-              )} name="bloodType" />
+              {/* Tipo Sanguineo */}
+              <Controller
+                control={control}
+                rules={{
+                  pattern: {
+                    value: /^[ABO][+-]$|^[AB][AB]$|^[O][+-]$/,
+                    message: "Tipo sanguíneo inválido"
+                  }
+                }}
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <TextInput
+                    style={{ ...styles.inputLabel, width: 85 }}
+                    placeholderTextColor={'gray'}
+                    selectionColor={'#00C2FF'}
+                    selectTextOnFocus={true}
+                    placeholder="Tipo"
+                    onBlur={onBlur}
+                    onChangeText={onChange}
+                    value={value}
+                    maxLength={3} // Limitar o comprimento do campo
+                    autoCapitalize="characters" // Colocar as letras em maiúsculo automaticamente
+                  />
+                )}
+                name="bloodType"
+              />
 
-              {errors.weight && <Text style = {styles.require}>*</Text>}
-              {errors.value && <Text style = {styles.require}>*</Text>}
-              {errors.bloodType && <Text style = {styles.require}>*</Text>}
+              {errors.weight && <Text style={styles.require}>*</Text>}
+              {errors.value && <Text style={styles.require}>*</Text>}
+              {errors.bloodType && <Text style={styles.require}>*</Text>}
             </View>
 
             <View style={{ ...styles.sectionInput, flexDirection: 'row', alignItems: 'center' }}>
@@ -286,19 +375,31 @@ export function AddPatients({ navigation }: Props): JSX.Element {
             {/* Nº Cartão SUS */}
             <View style={styles.sectionInput}>
               <Text style={styles.sectionText}>Nº Cartão SUS: </Text>
-              <Controller control={control} rules={{ required: true }} render={({ field: { onChange, onBlur, value } }) => (
-                <TextInput
-                  style={{ ...styles.inputLabel }}
-                  placeholderTextColor={'gray'}
-                  selectionColor={'#00C2FF'}
-                  selectTextOnFocus={true}
-                  placeholder="000 0000 0000 0000"
-                  onBlur={onBlur}
-                  onChangeText={onChange}
-                  value={value}
-                />
-              )} name="susCardNumber" />
-              {errors.susCardNumber && <Text style = {styles.require}>*</Text>}
+              <Controller
+                control={control}
+                rules={{
+                  pattern: {
+                    value: /^\d{3}\d{4}\d{4}\d{4}$/,
+                    message: "Número do cartão do SUS inválido"
+                  }
+                }}
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <TextInput
+                    style={styles.inputLabel}
+                    placeholderTextColor={'gray'}
+                    selectionColor={'#00C2FF'}
+                    selectTextOnFocus={true}
+                    placeholder="000 0000 0000 0000"
+                    onBlur={onBlur}
+                    onChangeText={onChange}
+                    value={value}
+                    maxLength={15}
+                  />
+                )}
+                name="susCardNumber"
+              />
+              {errors.susCardNumber && <Text style={styles.require}>*</Text>}
+
             </View>
 
             {/* Nome do responsável */}
@@ -321,7 +422,15 @@ export function AddPatients({ navigation }: Props): JSX.Element {
             {/* Telefone responsável */}
             <View style={styles.sectionInput}>
               <Text style={styles.sectionText}>Telefone responsável: </Text>
-              <Controller control={control} render={({ field: { onChange, onBlur, value } }) => (
+              <Controller 
+              control={control}
+              rules={{
+                pattern: {
+                  value: /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/,
+                  message: "Telefone inválido"
+                }
+              }} 
+              render={({ field: { onChange, onBlur, value } }) => (
                 <TextInput
                   style={{ ...styles.inputLabel }}
                   placeholderTextColor={'gray'}
@@ -330,9 +439,11 @@ export function AddPatients({ navigation }: Props): JSX.Element {
                   placeholder="(00) 0000-0000"
                   onBlur={onBlur}
                   onChangeText={onChange}
+                  maxLength={11}
                   value={value}
                 />
               )} name="responsavelTelefone" />
+            {errors.responsavelTelefone && <Text style={styles.require}>*</Text>}
             </View>
 
             {/* Tipo de Moradia */}
@@ -438,11 +549,17 @@ export function AddPatients({ navigation }: Props): JSX.Element {
                 value={value}
               />
             )} name="road" />
-            {errors.road && <Text style = {styles.require}>*</Text>}
+            {errors.road && <Text style={styles.require}>*</Text>}
 
             {/* Número */}
             <Text style={{ ...styles.sectionText, marginLeft: -60 }}>Nº: </Text>
-            <Controller control={control} rules={{ required: true }} render={({ field: { onChange, onBlur, value } }) => (
+            <Controller control={control} 
+            rules={{ required: true ,
+              pattern: {
+                value: /^[0-9]+$/,
+                message: "Este campo aceita apenas números"
+              }
+            }} render={({ field: { onChange, onBlur, value } }) => (
               <TextInput
                 style={{ ...styles.inputLabel, width: 85 }}
                 placeholderTextColor={'gray'}
@@ -452,13 +569,14 @@ export function AddPatients({ navigation }: Props): JSX.Element {
                 onBlur={onBlur}
                 onChangeText={onChange}
                 value={value}
+                maxLength={5}
                 keyboardType="numeric" // Defina o teclado como numérico para digitar apenas números
               />
             )} name="number" />
-            {errors.number && <Text style = {styles.require}>*</Text>}
+            {errors.number && <Text style={styles.require}>*</Text>}
 
             {/* Bairro */}
-            <Text style={{...styles.sectionText, marginLeft: 25}}>Bairro: </Text>
+            <Text style={{ ...styles.sectionText, marginLeft: 25 }}>Bairro: </Text>
             <Controller control={control} rules={{ required: true }} render={({ field: { onChange, onBlur, value } }) => (
               <TextInput
                 style={{ ...styles.inputLabel }}
@@ -471,7 +589,7 @@ export function AddPatients({ navigation }: Props): JSX.Element {
                 value={value}
               />
             )} name="neighborhood" />
-            {errors.neighborhood && <Text style = {styles.require}>*</Text>}
+            {errors.neighborhood && <Text style={styles.require}>*</Text>}
           </View>
 
           <View style={styles.sectionInput}>
@@ -489,7 +607,7 @@ export function AddPatients({ navigation }: Props): JSX.Element {
                 value={value}
               />
             )} name="city" />
-            {errors.city && <Text style = {styles.require}>*</Text>}
+            {errors.city && <Text style={styles.require}>*</Text>}
 
             {/* UF */}
             <Text style={{ ...styles.sectionText, marginLeft: -60 }}>UF: </Text>
@@ -505,7 +623,7 @@ export function AddPatients({ navigation }: Props): JSX.Element {
                 value={value}
               />
             )} name="state" />
-            {errors.state && <Text style = {styles.require}>*</Text>}
+            {errors.state && <Text style={styles.require}>*</Text>}
 
             {/* Nome do plano Saúde */}
             <View style={styles.sectionInput}>
@@ -526,12 +644,12 @@ export function AddPatients({ navigation }: Props): JSX.Element {
           </View>
         </View>
 
-        <View style={{ flexDirection: 'row', justifyContent: 'center'}}>
-          <TouchableOpacity style={{...styles.butt, backgroundColor: 'green'}}  onPress={handleSubmit(onSubmit)}>
+        <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+          <TouchableOpacity style={{ ...styles.butt, backgroundColor: 'green' }} onPress={handleSubmit(onSubmit)}>
             <Text style={styles.buttText}>Salvar</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={{...styles.butt, backgroundColor: 'red'}}>
-            <Text style={styles.buttText}>Cancelar</Text>
+          <TouchableOpacity style={{ ...styles.butt, backgroundColor: 'red' }} onPress={() => reset()}>
+            <Text style={styles.buttText}>Limpar</Text>
           </TouchableOpacity>
         </View>
 
