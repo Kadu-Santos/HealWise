@@ -10,27 +10,27 @@ export class CreatPatientController {
                     cpf: dataPatient.cpf,
                     name: dataPatient.name,
                     birthDate: `${dataPatient.birthYear}/${dataPatient.birthMonth}/${dataPatient.birthDay}`,
-                    enrollmentNumber: dataPatient.studentNumber,
+                    enrollmentNumber: dataPatient.enrollmentNumber,
                     phone: dataPatient.phone,
-                    courses: dataPatient.course,
-                    classe: dataPatient.class,
-                    healthPlan: dataPatient.planhealth,
-                    guardianName: dataPatient.responsavelName,
-                    guardianPhone: dataPatient.responsavelTelefone,
+                    courses: dataPatient.courses,
+                    classe: dataPatient.classe,
+                    healthPlan: dataPatient.healthPlan,
+                    guardianName: dataPatient.guardianName,
+                    guardianPhone: dataPatient.guardianPhone,
                     weight: dataPatient.weight,
-                    height: dataPatient.value,
+                    height: dataPatient.height,
                     bloodType: dataPatient.bloodType,
                     gender: dataPatient.gender,
                     susCardNumber: dataPatient.susCardNumber,
                     addresses: {
                         create: [
                             {
-                                street: dataPatient.road,
+                                street: dataPatient.street,
                                 number: dataPatient.number,
-                                district: dataPatient.neighborhood,
+                                district: dataPatient.district,
                                 city: dataPatient.city,
                                 state: dataPatient.state,
-                                dwellingType: dataPatient.moradia,
+                                dwellingType: dataPatient.dwellingType,
                             }
                         ]
                     }

@@ -20,28 +20,31 @@ export function AddPatients({ navigation }: Props): JSX.Element {
     defaultValues: {
       name: '',
       cpf: '',
+
       birthDay: '',
       birthMonth: '',
       birthYear: '',
-      studentNumber: '',
+
+      enrollmentNumber: '',
       phone: '',
-      course: '',
-      class: '',
+      courses: '',
+      classe: '',
+      healthPlan: '',
+      guardianName: '',
+      guardianPhone: '',
       weight: '',
-      value: '',
+      height: '',
       bloodType: '',
-      susCardNumber: '',
-      responsavelName: '',
-      responsavelTelefone: '',
       gender: 'M',
-      moradia: '1',
+      susCardNumber: '',
       regime: '',
-      road: '',
+      
       number: '',
-      neighborhood: '',
+      street: '',
+      district: '',
       city: '',
       state: '',
-      planhealth: ''
+      dwellingType: '1',
     }
   });
 
@@ -143,7 +146,15 @@ export function AddPatients({ navigation }: Props): JSX.Element {
             <View style={styles.sectionInput}>
               <Text style={styles.sectionText}>Data Nascimento: </Text>
               <View style={{ flexDirection: 'row' }}>
-                <Controller control={control} rules={{ required: true }} render={({ field: { onChange, onBlur, value } }) => (
+                <Controller control={control} 
+                rules={{ 
+                  required: true,
+                  pattern: {
+                    value: /^(0?[1-9]|[12][0-9]|3[01])$/, // Aceita números de 1 a 31
+                    message: "Dia inválido"
+                  } 
+                }} 
+                render={({ field: { onChange, onBlur, value } }) => (
                   <TextInput
                     style={{ ...styles.inputLabel, width: 85 }}
                     placeholderTextColor={'gray'}
@@ -152,11 +163,20 @@ export function AddPatients({ navigation }: Props): JSX.Element {
                     placeholder="Dia"
                     onBlur={onBlur}
                     onChangeText={onChange}
+                    maxLength={2}
                     value={value}
                   />
                 )} name="birthDay" />
 
-                <Controller control={control} rules={{ required: true }} render={({ field: { onChange, onBlur, value } }) => (
+                <Controller control={control} 
+                rules={{
+                  required: true,
+                  pattern: {
+                    value: /^(0?[1-9]|1[0-2])$/,
+                    message: "Mês inválido"
+                  }
+                }}
+                render={({ field: { onChange, onBlur, value } }) => (
                   <TextInput
                     style={{ ...styles.inputLabel, width: 85 }}
                     placeholderTextColor={'gray'}
@@ -165,11 +185,20 @@ export function AddPatients({ navigation }: Props): JSX.Element {
                     placeholder="Mês"
                     onBlur={onBlur}
                     onChangeText={onChange}
+                    maxLength={2}
                     value={value}
                   />
                 )} name="birthMonth" />
 
-                <Controller control={control} rules={{ required: true }} render={({ field: { onChange, onBlur, value } }) => (
+                <Controller control={control} 
+                rules={{
+                  required: true,
+                  pattern: {
+                    value: /^(19[2-9][0-9]|20[0-9][0-9]|29[0-9][0-9])$/,
+                    message: "Ano inválido"
+                  }
+                }}
+                render={({ field: { onChange, onBlur, value } }) => (
                   <TextInput
                     style={{ ...styles.inputLabel, width: 85 }}
                     placeholderTextColor={'gray'}
@@ -178,6 +207,7 @@ export function AddPatients({ navigation }: Props): JSX.Element {
                     placeholder="Ano"
                     onBlur={onBlur}
                     onChangeText={onChange}
+                    maxLength={4}
                     value={value}
                   />
                 )} name="birthYear" />
@@ -201,8 +231,8 @@ export function AddPatients({ navigation }: Props): JSX.Element {
                   onChangeText={onChange}
                   value={value}
                 />
-              )} name="studentNumber" />
-              {errors.studentNumber && <Text style={styles.require}>*</Text>}
+              )} name="enrollmentNumber" />
+              {errors.enrollmentNumber && <Text style={styles.require}>*</Text>}
             </View>
 
             {/* Telefone */}
@@ -232,7 +262,8 @@ export function AddPatients({ navigation }: Props): JSX.Element {
                 )} name="phone" />
               {errors.phone && <Text style={styles.require}>*</Text>}
             </View>
-
+            
+            {/* Curso */}
             <View style={styles.sectionInput}>
               <Text style={styles.sectionText}>Curso: </Text>
               <Controller control={control} rules={{ required: true }} render={({ field: { onChange, onBlur, value } }) => (
@@ -246,7 +277,7 @@ export function AddPatients({ navigation }: Props): JSX.Element {
                   onChangeText={onChange}
                   value={value}
                 />
-              )} name="course" />
+              )} name="courses" />
 
               <Controller control={control} rules={{ required: true }} render={({ field: { onChange, onBlur, value } }) => (
                 <TextInput
@@ -259,9 +290,9 @@ export function AddPatients({ navigation }: Props): JSX.Element {
                   onChangeText={onChange}
                   value={value}
                 />
-              )} name="class" />
-              {errors.course && <Text style={styles.require}>*</Text>}
-              {errors.class && <Text style={styles.require}>*</Text>}
+              )} name="classe" />
+              {errors.courses && <Text style={styles.require}>*</Text>}
+              {errors.classe && <Text style={styles.require}>*</Text>}
             </View>
 
             <View style={{ flexDirection: 'row', marginLeft: 100, marginTop: 10 }}>
@@ -314,7 +345,7 @@ export function AddPatients({ navigation }: Props): JSX.Element {
                     onChangeText={onChange}
                     value={value}
                   />
-                )} name="value" />
+                )} name="height" />
 
               {/* Tipo Sanguineo */}
               <Controller
@@ -343,7 +374,7 @@ export function AddPatients({ navigation }: Props): JSX.Element {
               />
 
               {errors.weight && <Text style={styles.require}>*</Text>}
-              {errors.value && <Text style={styles.require}>*</Text>}
+              {errors.height && <Text style={styles.require}>*</Text>}
               {errors.bloodType && <Text style={styles.require}>*</Text>}
             </View>
 
@@ -416,7 +447,7 @@ export function AddPatients({ navigation }: Props): JSX.Element {
                   onChangeText={onChange}
                   value={value}
                 />
-              )} name="responsavelName" />
+              )} name="guardianName" />
             </View>
 
             {/* Telefone responsável */}
@@ -442,8 +473,8 @@ export function AddPatients({ navigation }: Props): JSX.Element {
                   maxLength={11}
                   value={value}
                 />
-              )} name="responsavelTelefone" />
-            {errors.responsavelTelefone && <Text style={styles.require}>*</Text>}
+              )} name="guardianPhone" />
+            {errors.guardianPhone && <Text style={styles.require}>*</Text>}
             </View>
 
             {/* Tipo de Moradia */}
@@ -456,7 +487,7 @@ export function AddPatients({ navigation }: Props): JSX.Element {
                     value="1"
                     status={value === '1' ? 'checked' : 'unchecked'}
                     onPress={() => onChange('1')} />
-                )} name="moradia" />
+                )} name="dwellingType" />
                 <Text style={styles.sectionTextRadio}>Com os Pais</Text>
               </View>
 
@@ -466,7 +497,7 @@ export function AddPatients({ navigation }: Props): JSX.Element {
                     value="2"
                     status={value === '2' ? 'checked' : 'unchecked'}
                     onPress={() => onChange('2')} />
-                )} name="moradia" />
+                )} name="dwellingType" />
                 <Text style={styles.sectionTextRadio}>Parentes</Text>
               </View>
 
@@ -476,7 +507,7 @@ export function AddPatients({ navigation }: Props): JSX.Element {
                     value="3"
                     status={value === '3' ? 'checked' : 'unchecked'}
                     onPress={() => onChange('3')} />
-                )} name="moradia" />
+                )} name="dwellingType" />
                 <Text style={styles.sectionTextRadio}>Escola</Text>
               </View>
 
@@ -486,7 +517,7 @@ export function AddPatients({ navigation }: Props): JSX.Element {
                     value="4"
                     status={value === '4' ? 'checked' : 'unchecked'}
                     onPress={() => onChange('4')} />
-                )} name="moradia" />
+                )} name="dwellingType" />
                 <Text style={styles.sectionTextRadio}>República</Text>
               </View>
 
@@ -496,7 +527,7 @@ export function AddPatients({ navigation }: Props): JSX.Element {
                     value="5"
                     status={value === '5' ? 'checked' : 'unchecked'}
                     onPress={() => onChange('5')} />
-                )} name="moradia" />
+                )} name="dwellingType" />
                 <Text style={styles.sectionTextRadio}>Outro</Text>
               </View>
             </View>
@@ -548,8 +579,8 @@ export function AddPatients({ navigation }: Props): JSX.Element {
                 onChangeText={onChange}
                 value={value}
               />
-            )} name="road" />
-            {errors.road && <Text style={styles.require}>*</Text>}
+            )} name="street" />
+            {errors.street && <Text style={styles.require}>*</Text>}
 
             {/* Número */}
             <Text style={{ ...styles.sectionText, marginLeft: -60 }}>Nº: </Text>
@@ -588,8 +619,8 @@ export function AddPatients({ navigation }: Props): JSX.Element {
                 onChangeText={onChange}
                 value={value}
               />
-            )} name="neighborhood" />
-            {errors.neighborhood && <Text style={styles.require}>*</Text>}
+            )} name="district" />
+            {errors.district && <Text style={styles.require}>*</Text>}
           </View>
 
           <View style={styles.sectionInput}>
@@ -639,7 +670,7 @@ export function AddPatients({ navigation }: Props): JSX.Element {
                   onChangeText={onChange}
                   value={value}
                 />
-              )} name="planhealth" />
+              )} name="healthPlan" />
             </View>
           </View>
         </View>

@@ -50,4 +50,4 @@ export const styles = {
     padding: 2, 
     borderRadius: 5,
   }
-}
+} as const;
